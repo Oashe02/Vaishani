@@ -1,5 +1,6 @@
 import React from 'react'
 import './App.css'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import RatesCard from './Pages/RatesCard'
 import VehicleCard from './Pages/VehicleCard'
 import ServiceNetwork from './Pages/ServiceNetwork'
@@ -7,42 +8,28 @@ import PrivacyandPolicy from './Pages/PrivacyandPolicy'
 import ContactUs from './components/ContactUs'
 import Home from './Pages/Home'
 import FeedBack from './components/FeedBack'
-import EnquiryPage from './Pages/EnquiryPage';
+import EnquiryPage from './Pages/EnquiryPage'
 import AboutUs from './Pages/AboutUs'
 import Navbar from './components/Navbar'
-<<<<<<< HEAD
-=======
-
->>>>>>> ca9278e (req)
-
 
 function App() {
   return (
-    <div >
-      {/* <RatesCard/> */}
-      {/* <VehicleCard/> */}
-      {/* <ServiceNetwork/> */}
-      {/* <PrivacyandPolicy/>  */}
-      {/* <ContactUs/>  */}
-<<<<<<< HEAD
-      {/* <Home/> */}
-      {/* <FeedBack/> */}
-      {/* <EnquiryPage/> */}
-      {/* <AboutUs /> */}
-      <Navbar />
-=======
-      <Navbar />
-      <Home/>
-      {/* <FeedBack/> */}
-
-      {/* <EnquiryPage/> */}
-      {/* <AboutUs /> */}
-
-      {/* <EnquiryPage/>  */}
-      {/* <AboutUs/> */}
-
->>>>>>> ca9278e (req)
-       </div>
+    <Router>
+      <div>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/rates" element={<RatesCard />} />
+          <Route path="/vehicles" element={<VehicleCard />} />
+          <Route path="/service-network" element={<ServiceNetwork />} />
+          <Route path="/privacy-policy" element={<PrivacyandPolicy />} />
+          <Route path="/contact" element={<ContactUs />} />
+          <Route path="/feedback" element={<FeedBack />} />
+          <Route path="/enquiry" element={<EnquiryPage />} />
+          <Route path="/about" element={<AboutUs />} />
+        </Routes>
+      </div>
+    </Router>
   )
 }
 
