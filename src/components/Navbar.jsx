@@ -62,14 +62,6 @@ const Navbar = () => {
     fetchWeather();
   }, []);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 10);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   const getWeatherIcon = (condition) => {
     switch (condition?.toLowerCase()) {
