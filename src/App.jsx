@@ -12,13 +12,14 @@ import EnquiryPage from './Pages/EnquiryPage'
 import AboutUs from './Pages/AboutUs'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
+import ChatBot from './components/Chatbot'
 
 function App() {
   return (
     <Router>
       <div>
         <Navbar />
-
+        <ChatBot />
         <div className='pt-16 bg-black'>
           <Routes>
             <Route path="/" element={<Home />} />
