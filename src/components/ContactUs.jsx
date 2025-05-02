@@ -16,7 +16,7 @@ const ContactCard = ({ Icon, title, content, link }) => {
         target={link?.startsWith('http') ? '_blank' : undefined}
         rel={link?.startsWith('http') ? 'noopener noreferrer' : undefined}
         className="block bg-gray-900/80 backdrop-blur-lg p-6 rounded-2xl border border-gray-700 shadow-sm 
-                   hover:shadow-yellow-400/10 transition-all duration-300 cursor-pointer"
+                   hover:shadow-yellow-400/10 transition-all duration-300 cursor-pointer px-4"
       >
         <div className="flex items-center gap-4 mb-4">
           <div className="bg-yellow-400/20 p-3 rounded-xl">

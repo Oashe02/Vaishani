@@ -18,21 +18,24 @@ function App() {
     <Router>
       <div>
         <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/rates" element={<RatesCard />} />
-          <Route path="/vehicles" element={<VehicleCard />} />
-          <Route path="/service-network" element={<ServiceNetworkMap />} />
-          <Route path="/privacy-policy" element={<PrivacyandPolicy />} />
-          <Route path="/contact" element={<ContactUs />} />
-          <Route path="/feedback" element={<FeedBack />} />
-          <Route path="/enquiry" element={<EnquiryPage />} />
-          <Route path="/about" element={<AboutUs />} />
-        </Routes>
+
+        <div className='pt-16 bg-black'>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/rates" element={<RatesCard />} />
+            <Route path="/vehicles" element={<VehicleCard />} />
+            <Route path="/service-network" element={<ServiceNetworkMap />} />
+            <Route path="/privacy-policy" element={<PrivacyandPolicy />} />
+            <Route path="/contact" element={<ContactUs />} />
+            <Route path="/feedback" element={<FeedBack />} />
+            <Route path="/enquiry" element={<EnquiryPage />} />
+            <Route path="/about" element={<AboutUs />} />
+          </Routes>
+        </div>
         <Footer />
       </div>
     </Router>
-  )
+  );
 }
 
 export default App;

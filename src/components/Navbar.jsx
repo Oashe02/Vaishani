@@ -11,6 +11,7 @@ import {
   CloudLightning,
   Wind,
 } from "lucide-react";
+import logo from "../assets/VaishnaviTours.png";
 
 const navLinks = [
   { label: "Home", to: "/" },
@@ -98,39 +99,58 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed left-0 top-0 w-full z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ease-in-out ${
         scrolled
-          ? "bg-black/95 backdrop-blur-sm shadow-xl py-2 border-b border-amber-500/20"
-          : "bg-black"
+          ? "bg-black/95 py-1 shadow-md backdrop-blur-sm border-b border-amber-500/20"
+          : "bg-black py-3"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <div className="flex items-center">
-            <Link
-              to="/"
-              className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-amber-300 to-amber-500"
+        <div
+          className={`flex items-center justify-between transition-all duration-300 ${
+            scrolled ? "h-14 sm:h-12" : "h-16 sm:h-14"
+          }`}
+        >
+          {/* Logo and Title */}
+          <Link
+            to="/"
+            className={`flex items-center gap-2 transition-all duration-300 pr-2 ${
+              scrolled ? "scale-90" : "scale-100"
+            }`}
+          >
+            <div
+              className={`flex items-center justify-center rounded-full border border-yellow-400 shadow-[0_4px_20px_0_rgba(255,228,97,0.15)] transition-all ${
+                scrolled ? "w-8 h-8" : "w-10 h-10"
+              }`}
+            >
+              <img
+                src={logo}
+                alt="Vaishnavi Tours Logo"
+                className={`object-contain transition-all ${
+                  scrolled ? "w-4 h-4" : "w-6 h-6"
+                }`}
+              />
+            </div>
+            <span
+              className={`font-semibold font-mono tracking-tight text-yellow-400 transition-all ${
+                scrolled ? "text-xs" : "text-sm"
+              }`}
             >
               Vaishnavi Tours
-            </Link>
-          </div>
+            </span>
+          </Link>
 
           {/* Weather */}
           <div className="hidden md:flex items-center space-x-2 bg-black/80 px-4 py-2 rounded-full border border-amber-500/40 shadow-lg shadow-amber-500/5">
             {loading ? (
               <div className="animate-pulse h-4 w-24 bg-gray-800 rounded" />
             ) : weather ? (
-              <>
-                <div className="flex items-center ">
-                  {getWeatherIcon(weather.weather[0].main, "text-white")}
-                  {!loading && weather && (
-                    <span className="ml-1 text-sm font-medium text-amber-300">
-                      {weather.name}: {Math.round(weather.main.temp)}°C
-                    </span>
-                  )}
-                </div>
-              </>
+              <div className="flex items-center">
+                {getWeatherIcon(weather.weather[0].main)}
+                <span className="ml-1 text-sm font-medium text-amber-300">
+                  {weather.name}: {Math.round(weather.main.temp)}°C
+                </span>
+              </div>
             ) : (
               <span className="text-amber-500/70 text-sm">
                 Weather unavailable
@@ -147,7 +167,7 @@ const Navbar = () => {
                     key={link.label}
                     to={link.to}
                     onClick={() => handleNavigation(link.to)}
-                    className={`px-3 py-2 rounded-md text-sm font-medium ${
+                    className={`px-3 py-2 rounded-md text-sm font-medium transition-all ${
                       location.pathname === link.to
                         ? "text-amber-400 font-semibold relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-amber-500 after:rounded-full"
                         : "text-gray-300 hover:text-amber-300 hover:bg-gray-900"
@@ -166,7 +186,7 @@ const Navbar = () => {
             </Link>
           </div>
 
-          {/* Mobile menu button */}
+          {/* Mobile menu */}
           <div className="lg:hidden flex items-center">
             {!loading && weather && (
               <div className="mr-4 flex items-center text-sm text-amber-300">
@@ -194,11 +214,11 @@ const Navbar = () => {
 
       {/* Mobile Drawer */}
       <div
-        className={`fixed top-0 right-0 h-full w-3/4 max-w-sm bg-black shadow-2xl z-50 transition-transform duration-300 ${
+        className={`fixed top-0 right-0 h-full w-2/3 sm:w-1/2 xs:w-[180px] max-w-xs bg-black shadow-2xl z-50 transition-transform duration-300 ${
           isMenuOpen ? "translate-x-0" : "translate-x-full"
         } border-l border-amber-500/30`}
       >
-        <div className="flex justify-between items-center p-4 border-b border-amber-500/30">
+        <div className="flex justify-between items-center p-3 border-b border-amber-500/30">
           <span className="text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r from-amber-300 to-amber-500">
             Vaishnavi Tours
           </span>
