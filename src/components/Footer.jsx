@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaFacebookF, FaYoutube, FaInstagram, FaWhatsapp } from "react-icons/fa";
 import { motion } from "framer-motion";
+import { useScrollToTop } from '../hooks/useScrollToTop';
 import logo from '../assets/VaishnaviTours.png';
 
 const menuLinks = [
@@ -61,6 +62,17 @@ const SOCIAL_ANIMATION = {
 };
 
 const Footer = () => {
+  const navigate = useNavigate();
+  useScrollToTop();
+
+  const handleNavigation = (to) => {
+    navigate(to);
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
   useEffect(() => {
     const script = document.createElement("script");
     script.src =
@@ -154,6 +166,7 @@ const Footer = () => {
                 >
                   <Link
                     to={link.to}
+                    onClick={() => handleNavigation(link.to)}
                     className="relative font-semibold text-base md:text-lg text-white/90 transition-all duration-200 hover:text-[#FFD700] group"
                   >
                     {link.name}
