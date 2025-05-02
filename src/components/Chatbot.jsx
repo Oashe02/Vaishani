@@ -1,4 +1,5 @@
 import { useState } from "react";
+import VaishnaviLogo from "../assets/VaishnaviTours.png"; // Adjust the path as per your project structure
 
 const YatraBot = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,23 +14,6 @@ const YatraBot = () => {
     e.stopPropagation();
     setIsMinimized(!isMinimized);
   };
-
-  const carIcon = (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="22"
-      height="22"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M14 16H9m10 0h3v-3.15a1 1 0 0 0-.84-.99L16 11l-2.7-3.6a1 1 0 0 0-.8-.4H5.24a2 2 0 0 0-1.8 1.1l-.8 1.63A6 6 0 0 0 2 12.42V16h2"></path>
-      <circle cx="6.5" cy="16.5" r="2.5"></circle>
-      <circle cx="16.5" cy="16.5" r="2.5"></circle>
-    </svg>
-  );
 
   const closeIcon = (
     <svg
@@ -65,15 +49,17 @@ const YatraBot = () => {
   return (
     <div className="font-sans">
       {/* Floating Chat Toggle Button */}
-      <div className="fixed bottom-5 right-5 z-50 flex flex-col items-end">
+      <div className="fixed bottom-8 right-5 z-50 flex flex-col items-end">
         <button
           onClick={toggleChat}
           className="w-16 h-16 bg-gradient-to-r from-black to-gray-900 border border-yellow-400 rounded-full flex items-center justify-center shadow-[0_10px_20px_rgba(0,0,0,0.5)] transition-all duration-300 hover:scale-110 hover:shadow-[0_15px_25px_rgba(255,215,0,0.4)]"
           aria-label="Toggle Yatra Taxi Bot"
         >
-          <span className="text-yellow-400">
-            {isOpen ? closeIcon : carIcon}
-          </span>
+          <img
+            src={VaishnaviLogo}
+            alt="Vaishnavi Tour Logo"
+            className="w-10 h-10 rounded-full object-cover"
+          />
         </button>
       </div>
 
@@ -100,11 +86,15 @@ const YatraBot = () => {
           >
             <div className="flex items-center">
               <div className="w-9 h-9 bg-white/20 rounded-full flex items-center justify-center mr-3 shadow-inner">
-                <span className="text-white">{carIcon}</span>
+                <img
+                  src={VaishnaviLogo}
+                  alt="Vaishnavi Tour Logo"
+                  className="w-7 h-7 rounded-full object-cover"
+                />
               </div>
               <div>
                 <h3 className="text-white font-semibold text-sm tracking-wide">
-                  YATRA
+                  VAISHNAVI TOURS
                 </h3>
                 <div className="flex items-center">
                   <span className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse" />

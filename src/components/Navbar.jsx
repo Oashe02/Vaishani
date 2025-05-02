@@ -118,8 +118,8 @@ const Navbar = () => {
               <img
                 src={logo}
                 alt="Vaishnavi Tours Logo"
-                className={`object-contain transition-all ${
-                  scrolled ? "w-4 h-4" : "w-6 h-6"
+                className={`object-contain transition-all duration-300 ${
+                  scrolled ? "w-12 h-12" : "w-16 h-16"
                 }`}
               />
             </div>
