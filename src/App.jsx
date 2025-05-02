@@ -13,6 +13,7 @@ import AboutUs from './Pages/AboutUs'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import ChatBot from './components/Chatbot'
+import Call from './components/CallNow'
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
       <div>
         <Navbar />
         <ChatBot />
+        <Call/>
         <div className='pt-16 bg-black'>
           <Routes>
             <Route path="/" element={<Home />} />

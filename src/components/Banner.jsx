@@ -7,6 +7,7 @@ import {
   FaYoutube,
   FaWhatsapp,
 } from "react-icons/fa";
+import { Link } from 'react-router-dom';
 
 import innova from "../assets/crysta.png";
 import ertiga from "../assets/swift.png";
@@ -46,6 +47,7 @@ export default function Banner() {
   const [showContent, setShowContent] = useState(false);
   const [carIndex, setCarIndex] = useState(0);
   const [direction, setDirection] = useState(1); 
+  const [isBelowMedium, setIsBelowMedium] = useState(window.innerWidth < 768);
 
   useEffect(() => {
     if (splitDone) {
@@ -60,6 +62,15 @@ export default function Banner() {
       setCarIndex((prev) => (prev + 1) % CAR_IMAGES.length);
     }, 5000);
     return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsBelowMedium(window.innerWidth < 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   return (
@@ -106,6 +117,44 @@ export default function Banner() {
           ))}
         </div>
       </div>
+
+      {/* Mobile Action Buttons - Only show below medium breakpoint */}
+      {isBelowMedium && (
+        <motion.div
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30 
+                    flex flex-col sm:flex-row items-center gap-4 sm:gap-6 w-full max-w-md px-4"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
+        >
+          <Link to="/rates" className="w-full sm:w-auto">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="w-full px-8 py-3 bg-[#fefe13] text-black rounded-full font-semibold text-lg
+                       flex items-center justify-center gap-2 shadow-lg hover:shadow-xl
+                       transition-all duration-300 hover:bg-[#e6e611]"
+            >
+              <FaMoneyCheckAlt className="text-xl" />
+              <span>Check Rates</span>
+            </motion.button>
+          </Link>
+
+          <a href="tel:+919244784443" className="w-full sm:w-auto">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="w-full px-8 py-3 bg-black text-[#fefe13] rounded-full font-semibold text-lg
+                       flex items-center justify-center gap-2 border-2 border-[#fefe13]
+                       shadow-lg hover:shadow-xl transition-all duration-300
+                       hover:bg-[#fefe13] hover:text-black"
+            >
+              <FaPhoneAlt className="text-xl" />
+              <span>Call Now</span>
+            </motion.button>
+          </a>
+        </motion.div>
+      )}
 
       {/* Main Content */}
       <AnimatePresence>
@@ -208,22 +257,9 @@ export default function Banner() {
     />
   </AnimatePresence>
 </div>
-
           </motion.div>
         )}
       </AnimatePresence>
-
-
-      <motion.div
-  className="absolute bottom-16 left-1/2 transform -translate-x-1/2 z-30 flex flex-col sm:flex-row items-center gap-6"
-  initial={{ opacity: 0, y: 50 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
->
-  {/* Check Rates Button */}
-
-</motion.div>
-
     </div>
   );
 }
