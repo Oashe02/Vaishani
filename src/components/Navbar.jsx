@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import {
   Menu,
   X,
@@ -11,30 +12,39 @@ import {
   Wind,
 } from "lucide-react";
 
+const navLinks = [
+  { label: "Home", to: "/" },
+  { label: "Rates", to: "/rates" },
+  { label: "Service Network", to: "/service-network" },
+  { label: "Vehicle Info", to: "/vehicles" },
+  { label: "Feedback", to: "/feedback" },
+  { label: "About Us", to: "/about" },
+  { label: "Contact Us", to: "/contact" },
+  { label: "Enquire Now", to: "/enquiry", isPrimary: true },
+];
+
 const Navbar = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [weather, setWeather] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [activeLink, setActiveLink] = useState("home");
 
   useEffect(() => {
     const fetchWeather = async () => {
       try {
-        // Step 1: Get user's coordinates
         const position = await new Promise((resolve, reject) =>
           navigator.geolocation.getCurrentPosition(resolve, reject)
         );
         const { latitude, longitude } = position.coords;
 
-        // Step 2: Reverse geocode to get city name
         const geoRes = await fetch(
           `https://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=1&appid=13ab580bfb8d5e82947f4c6e4358a614`
         );
         const geoData = await geoRes.json();
         const city = geoData?.[0]?.name || "Unknown";
 
-        // Step 3: Get weather data for the city
         const weatherRes = await fetch(
           `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=13ab580bfb8d5e82947f4c6e4358a614&units=metric`
         );
@@ -54,18 +64,6 @@ const Navbar = () => {
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 10);
-
-      const sections = document.querySelectorAll("section[id]");
-      sections.forEach((section) => {
-        const sectionTop = section.offsetTop - 100;
-        const sectionHeight = section.offsetHeight;
-        if (
-          window.scrollY >= sectionTop &&
-          window.scrollY < sectionTop + sectionHeight
-        ) {
-          setActiveLink(section.getAttribute("id"));
-        }
-      });
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -92,25 +90,10 @@ const Navbar = () => {
     }
   };
 
-  const navLinks = [
-    { label: "Home", href: "#home" },
-    { label: "Rates", href: "#rates" },
-    { label: "Service Network", href: "#service-network" },
-    { label: "Vehicle Info", href: "#vehicle-info" },
-    { label: "Feedback", href: "#feedback" },
-    { label: "About Us", href: "#about" },
-    { label: "Contact Us", href: "#contact" },
-    { label: "Enquire Now", href: "#enquire", isPrimary: true },
-  ];
-
-  const handleLinkClick = (e, id) => {
-    e.preventDefault();
-    setActiveLink(id);
+  const handleNavigation = (to) => {
+    navigate(to);
     setIsMenuOpen(false);
-    const element = document.getElementById(id);
-    if (element) {
-      window.scrollTo({ top: element.offsetTop - 80, behavior: "smooth" });
-    }
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -123,14 +106,14 @@ const Navbar = () => {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
+          {/* Logo */}
           <div className="flex items-center">
-            <a
-              href="#home"
-              onClick={(e) => handleLinkClick(e, "home")}
+            <Link
+              to="/"
               className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-amber-300 to-amber-500"
             >
               Vaishnavi Tours
-            </a>
+            </Link>
           </div>
 
           {/* Weather */}
@@ -160,27 +143,27 @@ const Navbar = () => {
             {navLinks.map(
               (link) =>
                 !link.isPrimary && (
-                  <a
+                  <Link
                     key={link.label}
-                    href={link.href}
-                    onClick={(e) => handleLinkClick(e, link.href.substring(1))}
+                    to={link.to}
+                    onClick={() => handleNavigation(link.to)}
                     className={`px-3 py-2 rounded-md text-sm font-medium ${
-                      activeLink === link.href.substring(1)
+                      location.pathname === link.to
                         ? "text-amber-400 font-semibold relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-amber-500 after:rounded-full"
                         : "text-gray-300 hover:text-amber-300 hover:bg-gray-900"
                     }`}
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 )
             )}
-            <a
-              href="#enquire"
-              onClick={(e) => handleLinkClick(e, "enquire")}
+            <Link
+              to="/enquiry"
+              onClick={() => handleNavigation("/enquiry")}
               className="bg-amber-500 hover:bg-amber-400 text-black font-semibold px-5 py-2 rounded-md ml-4 shadow-lg shadow-amber-500/20 transition transform hover:-translate-y-0.5"
             >
               Enquire Now
-            </a>
+            </Link>
           </div>
 
           {/* Mobile menu button */}
@@ -245,22 +228,22 @@ const Navbar = () => {
         {/* Links */}
         <div className="py-2 px-1 overflow-y-auto h-full bg-gradient-to-b from-black to-gray-900">
           {navLinks.map((link) => (
-            <a
+            <Link
               key={link.label}
-              href={link.href}
-              onClick={(e) => handleLinkClick(e, link.href.substring(1))}
+              to={link.to}
+              onClick={() => handleNavigation(link.to)}
               className={`block mx-3 my-1 px-4 py-3 rounded-lg text-base font-medium transition-all duration-200 ${
                 link.isPrimary
                   ? "bg-amber-500 text-black text-center my-4 shadow-lg hover:bg-amber-400"
                   : `${
-                      activeLink === link.href.substring(1)
+                      location.pathname === link.to
                         ? "text-amber-400 bg-gray-900/70 font-semibold border border-amber-500/30"
                         : "text-gray-300 hover:bg-gray-900 hover:text-amber-300"
                     }`
               }`}
             >
               {link.label}
-            </a>
+            </Link>
           ))}
         </div>
       </div>
