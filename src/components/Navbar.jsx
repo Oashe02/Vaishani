@@ -132,7 +132,7 @@ const Navbar = () => {
               />
             </div>
             <span
-              className={`font-semibold font-mono tracking-tight text-yellow-400 transition-all ${
+              className={`font-semibold font-mono tracking-tight text-white transition-all ${
                 scrolled ? "text-xs" : "text-sm"
               }`}
             >
