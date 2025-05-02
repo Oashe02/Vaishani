@@ -194,12 +194,6 @@ const FeedBack = () => {
             </div>
           </form>
 
-          {/* Footer */}
-          <footer className="mt-12 text-center text-sm text-gray-400">
-            <p>
-              © {new Date().getFullYear()} Vaishnavi Tours. All rights reserved.
-            </p>
-          </footer>
         </div>
       </div>
     </div>

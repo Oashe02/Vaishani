@@ -1,23 +1,18 @@
-import React,{useEffect} from "react";
-import {
-  FaFacebookF,
-  FaYoutube,
-  FaInstagram,
-  FaWhatsapp,
-} from "react-icons/fa";
+import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
+import { FaFacebookF, FaYoutube, FaInstagram, FaWhatsapp } from "react-icons/fa";
 import { motion } from "framer-motion";
-
-
+import logo from '../assets/VaishnaviTours.png';
 
 const menuLinks = [
-  { name: "Home", href: "#" },
-  { name: "Rates", href: "#" },
-  { name: "Service Network", href: "#" },
-  { name: "Vehicle Info", href: "#" },
-  { name: "Feedback", href: "#" },
-  { name: "About Us", href: "#" },
-  { name: "Contact Us", href: "#" },
-  { name: "Privacy & Policy", href: "#" },
+  { name: "Home", to: "/" },
+  { name: "Rates", to: "/rates" },
+  { name: "Service Network", to: "/service-network" },
+  { name: "Vehicle Info", to: "/vehicles" },
+  { name: "Feedback", to: "/feedback" },
+  { name: "About Us", to: "/about" },
+  { name: "Contact Us", to: "/contact" },
+  { name: "Privacy & Policy", to: "/privacy-policy" },
 ];
 
 const socialLinks = [
@@ -66,28 +61,28 @@ const SOCIAL_ANIMATION = {
 };
 
 const Footer = () => {
-    useEffect(() => {
-      const script = document.createElement("script");
-      script.src =
-        "https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs";
-      script.type = "module";
-      document.body.appendChild(script);
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src =
+      "https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs";
+    script.type = "module";
+    document.body.appendChild(script);
 
-      return () => {
-        document.body.removeChild(script);
-      };
-    }, []);
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
 
   return (
     <motion.footer
-      className="bg-[#121315] w-full border-t border-white/10 pt-10 pb-4 px-2 relative z-10"
+      className="bg-[#121315] w-full border-t border-white/10 pt-10 pb-4 px-2 relative z-10 items-center"
       initial="hidden"
       whileInView="visible"
       variants={FOOTER_ANIMATION}
       viewport={{ once: true }}
     >
       {/* Decorative wave SVG at top edge */}
-      <div className="absolute -top-3 left-0 w-full pointer-events-none select-none opacity-50">
+      <div className="absolute -top-3 left-0 w-full pointer-events-none select-none opacity-50 items-center">
         <svg viewBox="0 0 1440 55" fill="none">
           <path
             d="M0 33L80 37C160 41 320 49 480 40C640 31 800 7 960 8C1120 9 1280 34 1360 46L1440 58V0H1360C1280 0 1120 0 960 0C800 0 640 0 480 0C320 0 160 0 80 0H0V33Z"
@@ -99,33 +94,16 @@ const Footer = () => {
         <div className="grid md:grid-cols-3 gap-4 md:gap-6 place-items-start">
           {/* Brand/Logo Section */}
           <motion.div
-            className="w-full flex flex-col items-start gap-6"
+            className="w-full flex flex-col items-center gap-6 text-center"
             variants={FOOTER_ANIMATION}
           >
-            <div className="flex flex-col items-start gap-3">
-              {/* Circle + SVG Logo */}
+            <div className="flex flex-col items-center gap-3">
               <div className="w-[120px] h-[120px] flex items-center justify-center rounded-full border border-yellow-400 shadow-[0_8px_40px_0_rgba(255,228,97,0.10)]">
-                <svg
-                  width="62"
-                  height="62"
-                  viewBox="0 0 62 62"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <circle
-                    cx="31"
-                    cy="31"
-                    r="30.5"
-                    stroke="#ffe461"
-                    fill="none"
-                  />
-                  <polygon
-                    points="16,46 31,17 46,46"
-                    stroke="#ffe461"
-                    strokeWidth="3"
-                    fill="none"
-                  />
-                </svg>
+                <img 
+                  src={logo} 
+                  alt="Vaishnavi Tours Logo"
+                  className="w-16 h-16 object-contain"
+                />
               </div>
               <span className="font-bold text-3xl text-white/80 leading-tight mt-1 font-mono tracking-tight">
                 VaishnavI
@@ -174,13 +152,13 @@ const Footer = () => {
                   viewport={{ once: true }}
                   className="flex items-center justify-center md:justify-start"
                 >
-                  <a
-                    href={link.href}
+                  <Link
+                    to={link.to}
                     className="relative font-semibold text-base md:text-lg text-white/90 transition-all duration-200 hover:text-[#FFD700] group"
                   >
                     {link.name}
                     <span className="absolute left-0 bottom-[-2px] h-0.5 w-0 bg-[#FFD700] transition-all duration-300 group-hover:w-full rounded"></span>
-                  </a>
+                  </Link>
                 </motion.div>
               ))}
             </div>

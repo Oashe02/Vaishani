@@ -7,7 +7,7 @@ const AboutUs = () => {
   return (
     <div>
 
-        <CaptainsSection />
+
         <HeroSection />
         <CaptainsSection />
     </div>

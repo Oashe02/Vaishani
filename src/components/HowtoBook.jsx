@@ -1,27 +1,33 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 const steps = [
   {
     icon: "🚗",
     title: ["Step 1: Choose Your", "Vehicle"],
     buttonText: "Visit Now",
+    path: "/vehicles"
   },
   {
     icon: "📈",
     title: ["Step 2: Check Service", "Rates"],
     buttonText: "Visit Now",
+    path: "/rates"
   },
   {
     icon: "☎️",
     title: ["Step 3: Contact and", "Confirm"],
-    buttonText: "Visit Now",
+    buttonText: "Contact Us",
+    path: "/contact"
   }
 ];
 
 export default function HowToBook() {
-  const handleRedirect = () => {
-    window.location.href = "https://vaishnavitours.in";
+  const navigate = useNavigate();
+
+  const handleRedirect = (path) => {
+    navigate(path);
   };
 
   const containerVariants = {
@@ -71,6 +77,7 @@ export default function HowToBook() {
             variants={cardVariants}
             whileHover={{ scale: 1.05, boxShadow: '0 10px 20px rgba(0,0,0,0.25)' }}
             className="bg-[#fffd10] rounded-lg shadow-md flex flex-col items-center w-full max-w-[300px] min-h-[300px] px-4 py-8 md:px-8 md:py-8 cursor-pointer select-none"
+            onClick={() => handleRedirect(step.path)}
           >
             <motion.span 
               initial={{ scale: 0 }}
@@ -92,7 +99,10 @@ export default function HowToBook() {
             </motion.div>
             <motion.button
               type="button"
-              onClick={handleRedirect}
+              onClick={(e) => {
+                e.stopPropagation();
+                handleRedirect(step.path);
+              }}
               whileHover={{ scale: 1.05, backgroundColor: "black", color: "#fffd10" }}
               whileTap={{ scale: 0.95 }}
               className={`mt-auto rounded-full border-2 border-black px-8 py-3 text-black text-base md:text-lg flex items-center gap-2 min-w-[140px] md:min-w-[170px] text-center justify-center outline-none`}

@@ -1,8 +1,8 @@
 import { MapContainer, TileLayer, Marker, Popup, Polyline } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
-import {useState } from 'react';
-
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const customIcon = L.icon({
   iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
@@ -32,8 +32,12 @@ const connections = Object.entries(locations).flatMap(([cityA, coordA], i, arr) 
 );
 
 const ServiceNetworkMap = () => {
-  // activeCity use nahi kiya so error nahi aayega
+  const navigate = useNavigate();
   const [activeCity, setActiveCity] = useState(null);
+
+  const handleFeedback = () => {
+    navigate('/feedback');
+  };
 
   return (
     <div className="min-h-screen bg-[#0A0A0A] text-white relative">
@@ -118,7 +122,10 @@ const ServiceNetworkMap = () => {
           </p>
 
           <div className="flex justify-center gap-4">
-            <button className="group flex items-center gap-3 bg-yellow-500  text-black font-semibold py-4 px-8 rounded-xl transition-all backdrop-blur-sm cursor-pointer hover:bg-yellow-600">
+            <button 
+              onClick={handleFeedback}
+              className="group flex items-center gap-3 bg-yellow-500 text-black font-semibold py-4 px-8 rounded-xl transition-all backdrop-blur-sm cursor-pointer hover:bg-yellow-600"
+            >
               <span className="text-xl group-hover:scale-110 transition-transform">
                 💬
               </span>

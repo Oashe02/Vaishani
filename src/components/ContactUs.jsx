@@ -18,7 +18,7 @@ const ContactCard = ({ Icon, title, content, link }) => {
         className="block bg-gray-900/80 backdrop-blur-lg p-6 rounded-2xl border border-gray-700 shadow-sm 
                    hover:shadow-yellow-400/10 transition-all duration-300 cursor-pointer"
       >
-        <div className="flex items-start gap-4 mb-4 h-15">
+        <div className="flex items-center gap-4 mb-4">
           <div className="bg-yellow-400/20 p-3 rounded-xl">
             <Icon className="text-white text-2xl" />
           </div>

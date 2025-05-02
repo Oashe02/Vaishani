@@ -18,23 +18,28 @@ const BLACK = "black";
 const CAR_IMAGES = [innova, baleno, ertiga];
 
 const icons = [
-  { label: "YouTube", href: "#", icon: <FaYoutube size={18} color={BLACK} /> },
+  {
+    label: "YouTube",
+    href: "https://www.youtube.com/@VaishnaviTours",
+    icon: <FaYoutube size={18} color={BLACK} />,
+  },
   {
     label: "Instagram",
-    href: "#",
+    href: "https://www.instagram.com/vaishnavitours.bilaspur",
     icon: <FaInstagram size={18} color={BLACK} />,
   },
   {
     label: "Facebook",
-    href: "#",
+    href: "https://www.facebook.com/vaishnavitours",
     icon: <FaFacebookF size={18} color={BLACK} />,
   },
   {
     label: "WhatsApp",
-    href: "#",
+    href: "https://wa.me/9244784443",
     icon: <FaWhatsapp size={18} color={BLACK} />,
   },
 ];
+
 
 export default function Banner() {
   const [splitDone, setSplitDone] = useState(false);
